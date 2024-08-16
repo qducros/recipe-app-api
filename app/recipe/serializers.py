@@ -60,7 +60,7 @@ class RecipeSerializer(serializers.ModelSerializer):
                 **ingredient,
             )
             recipe.ingredients.add(ingredient_obj)
-    
+
     def create(self, validated_data):
         """Create a recipe."""
         tags = validated_data.pop('tags', [])
@@ -68,9 +68,9 @@ class RecipeSerializer(serializers.ModelSerializer):
         recipe = Recipe.objects.create(**validated_data)
         self._get_or_create_tags(tags, recipe)
         self._get_or_create_ingredients(ingredients, recipe)
-        
+
         return recipe
-    
+
     def update(self, instance, validated_data):
         """Update recipe."""
         tags = validated_data.pop('tags', None)
